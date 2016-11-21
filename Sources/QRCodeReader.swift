@@ -222,6 +222,24 @@ public final class QRCodeReader: NSObject, AVCaptureMetadataOutputObjectsDelegat
     }
     catch _ { }
   }
+  
+  /**
+   Exposure torch on the default device.
+   */
+  public func exposureFrontDevice(focusPoint: CGPoint?) {
+        do {
+            
+            if let frontDevice = frontDevice {
+                try! frontDevice.lockForConfiguration()
+                
+                frontDevice.exposurePointOfInterest = focusPoint!
+                frontDevice.exposureMode = .autoExpose
+                
+                frontDevice.unlockForConfiguration()
+            }
+        }
+        catch _ { }
+    }
 
   // MARK: - Managing the Orientation
 
